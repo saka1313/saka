@@ -1,0 +1,20 @@
+version: "3"
+services:
+  drug_db:
+    image: postgres:9.6
+    container_name: "drug_db"
+    ports:
+      - 5555:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    tty: true
+    restart: always
+    user: root
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - drug_db:/var/lib/postgresql/data
+
+volumes:
+  drug_db:
+    external: false
